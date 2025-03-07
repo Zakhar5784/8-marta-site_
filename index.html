@@ -6,66 +6,46 @@
     <title>С 8 Марта, Машенька!</title>
     <style>
         body {
-            background: linear-gradient(45deg, #ff758c, #ff7eb3, #ff9a9e, #fad0c4);
-            background-size: 400% 400%;
-            animation: gradientAnimation 10s ease infinite;
+            background-color: white;
             margin: 0;
-            overflow: hidden;
             font-family: Arial, sans-serif;
             text-align: center;
             color: black;
+            overflow: hidden;
         }
 
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
+        .falling-heart {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .content {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            animation: fadeInText 5s forwards, textZoom 5s forwards;
-        }
-
-        @keyframes fadeInText {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes textZoom {
-            0% { transform: scale(0.8); }
-            100% { transform: scale(1); }
-        }
-
-        .heart {
-            position: absolute;
-            font-size: 20px; /* Уменьшенный размер */
             color: red;
-            animation: flyHeart 3s forwards;
-            opacity: 1;
+            font-size: 20px;
+            animation: fall linear infinite;
+            animation-duration: 3s;
         }
 
-        @keyframes flyHeart {
+        @keyframes fall {
+            0% { transform: translateY(-10%); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Анимация для текста "Я тебя люблю очень сильно моя девочка" */
+        .love-text {
+            position: absolute;
+            bottom: 5%;
+            font-size: 40px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b81, #ff8c42, #ff4081);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: moveText 8s linear infinite;
+        }
+
+        @keyframes moveText {
             0% {
-                transform: translateX(-100vw);
+                transform: translateX(100vw);
                 opacity: 1;
             }
             50% {
-                transform: translateX(50vw);
+                transform: translateX(-100vw);
                 opacity: 1;
             }
             100% {
@@ -88,31 +68,40 @@
 <body>
 
     <script>
-        function createFlyingHeart() {
+        function createHeart() {
             const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "❤️ Ты только моя ❤️";
+            heart.classList.add("falling-heart");
+            heart.innerHTML = "❤️";
             document.body.appendChild(heart);
+
+            let size = Math.random() * 30 + 10;
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = size + "px";
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            heart.style.animationDuration = Math.random() * 4 + 2 + "s";
 
             setTimeout(() => {
                 heart.remove();
-            }, 3000); // Удаление после 3 секунд
+            }, 5000);
         }
 
-        setInterval(createFlyingHeart, 4000); // Создание нового сердечка каждые 4 секунды
+        setInterval(createHeart, 300);
     </script>
 
     <div class="container">
         <div class="content">
-            <h1>С 8 МАРТА</h1>
+            <h1>С 8 МАРТА!</h1>
             <h2>🌸 Моя дорогая Машенька! 🌸</h2>
-            <p>С 8 марта! 🌺 Пусть этот день принесет тебе больше радости, улыбок и волшебных моментов! ✨</p>
+            <p>С 8 марта! Пусть этот день принесет тебе больше радости, улыбок и волшебных моментов! 🌺</p>
             <p>Желаю всегда быть такой же яркой, вдохновляющей и невероятной! 😍</p>
-            <p>Пусть твоя жизнь будет наполнена счастьем, успехами и любовью! ♡</p>
-            <p>💖 Пусть каждый новый день будет лучше предыдущего!</p>
+            <p>Пусть твоя жизнь будет наполнена счастьем, успехами и любовью! 💖</p>
             <p>😊 Пусть тепло и радость окружают тебя каждый день, а сегодня — особенно!</p>
             <p>С праздником! 🌷</p>
         </div>
+    </div>
+
+    <div class="love-text">
+        Я тебя люблю очень сильно моя девочка ❤️💘
     </div>
 
 </body>
