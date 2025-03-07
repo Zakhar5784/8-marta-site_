@@ -30,14 +30,7 @@
             top: 30%;
             font-size: 40px;
             color: #ff4081;
-            opacity: 0;
             white-space: nowrap;
-            animation: textAppear 5s forwards;
-        }
-
-        @keyframes textAppear {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
 
         .heart-text span {
@@ -71,19 +64,6 @@
             0% { opacity: 0; transform: translateY(-20px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        .falling-heart {
-            position: absolute;
-            color: red;
-            font-size: 20px;
-            animation: fall linear infinite;
-            animation-duration: 3s;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10%); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
     </style>
 </head>
 <body>
@@ -113,27 +93,6 @@
             <span>а</span>
         </div>
     </div>
-
-    <script>
-        function createHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("falling-heart");
-            heart.innerHTML = "❤️";
-            document.body.appendChild(heart);
-
-            let size = Math.random() * 30 + 10;
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = size + "px";
-            heart.style.opacity = Math.random() * 0.7 + 0.3;
-            heart.style.animationDuration = Math.random() * 4 + 2 + "s";
-
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }
-
-        setInterval(createHeart, 300);
-    </script>
 
 </body>
 </html>
