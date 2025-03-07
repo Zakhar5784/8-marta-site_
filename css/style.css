@@ -22,41 +22,10 @@
             100% { background-position: 0% 50%; }
         }
 
-        .container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .content {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            opacity: 0;
-            animation: fadeInText 5s forwards;
-            transform: scale(0.8);
-            animation: textZoom 5s forwards;
-        }
-
-        @keyframes fadeInText {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes textZoom {
-            0% { transform: scale(0.8); }
-            100% { transform: scale(1); }
-        }
-
         .heart {
             position: absolute;
             color: red;
-            font-size: 20px;
+            font-size: 30px;
             animation: fall linear infinite;
         }
 
@@ -65,37 +34,74 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
-        .special-heart {
+        .flying-heart {
             position: absolute;
-            font-size: 24px;
-            color: red;
-            background: white;
-            padding: 5px 10px;
-            border-radius: 50px;
-            opacity: 0;
-            animation: flyHeart 4s ease-in-out 1s forwards;
+            font-size: 30px;
+            animation: flyHeart 3s ease-in-out;
         }
 
         @keyframes flyHeart {
-            0% { transform: translateX(-100%) translateY(50vh); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateX(100vw) translateY(30vh); opacity: 0; }
+            0% { transform: translateX(-100vw); opacity: 1; }
+            50% { transform: translateX(50vw) translateY(-50vh); opacity: 1; }
+            100% { transform: translateX(100vw); opacity: 0; }
         }
 
-        .footer {
-            position: fixed;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
+        .content {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            animation: fadeInText 5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        h1, h2, p {
+            transition: all 0.3s ease;
+        }
+
+        h1:hover, h2:hover, p:hover {
+            color: #ff4081;
+            transform: scale(1.1);
+        }
+
+        .button {
+            margin-top: 20px;
+            padding: 10px 20px;
             font-size: 18px;
+            border: none;
+            background-color: #ff4081;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #ff1a5b;
+            transform: scale(1.1);
+        }
+
+        .love-message {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            font-size: 25px;
+            color: #ff4081;
             font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
         }
     </style>
 </head>
 <body>
 
     <script>
-        function createHeart() {
+        // Функция для создания падающих сердечек
+        function createFallingHearts() {
             const heart = document.createElement("div");
             heart.classList.add("heart");
             heart.innerHTML = "❤️";
@@ -112,34 +118,41 @@
             }, 5000);
         }
 
-        setInterval(createHeart, 300);
+        // Функция для создания пролетающего сердечка
+        function createFlyingHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("flying-heart");
+            heart.innerHTML = "💖 Ты только моя 💖";
+            document.body.appendChild(heart);
 
-        setTimeout(() => {
-            const specialHeart = document.createElement("div");
-            specialHeart.classList.add("special-heart");
-            specialHeart.innerHTML = "Ты только моя ❤️";
-            document.body.appendChild(specialHeart);
-            
+            heart.style.left = "-100vw"; // Начальная позиция слева
+            heart.style.fontSize = "30px"; // Размер текста
+            heart.style.animationDuration = "3s"; // Время анимации
             setTimeout(() => {
-                specialHeart.remove();
-            }, 4000);
-        }, 2000);
+                heart.remove();
+            }, 3000); // Удалить после завершения анимации
+        }
+
+        // Запускаем функции
+        setInterval(createFallingHearts, 300);
+        setInterval(createFlyingHeart, 8000);
     </script>
 
-    <div class="container">
-        <div class="content">
-            <h1>С 8 МАРТА</h1>
-            <h2>🌸 Моя дорогая Машенька! 🌸</h2>
-            <p>С 8 марта! 🌺 Пусть этот день принесет тебе больше радости, улыбок и волшебных моментов! ✨</p>
-            <p>Желаю всегда быть такой же яркой, вдохновляющей и невероятной! 😍</p>
-            <p>Пусть твоя жизнь будет наполнена счастьем, успехами и любовью! ♡</p>
-            <p>💖 Пусть каждый новый день будет лучше предыдущего!</p>
-            <p>😊 Пусть тепло и радость окружают тебя каждый день, а сегодня — особенно!</p>
-            <p>С праздником! 🌷</p>
-        </div>
+    <div class="content">
+        <h1>С 8 МАРТА</h1>
+        <h2>🌸 Моя дорогая Машенька! 🌸</h2>
+        <p>С 8 марта! 🌺 Пусть этот день принесет тебе больше радости, улыбок и волшебных моментов! ✨</p>
+        <p>Желаю всегда быть такой же яркой, вдохновляющей и невероятной! 😍</p>
+        <p>Пусть твоя жизнь будет наполнена счастьем, успехами и любовью! ♡</p>
+        <p>💖 Пусть каждый новый день будет лучше предыдущего!</p>
+        <p>😊 Пусть тепло и радость окружают тебя каждый день, а сегодня — особенно!</p>
+        <p>С праздником! 🌷</p>
     </div>
 
-    <div class="footer">Я тебя люблю очень сильно, моя девочка ❤️</div>
+    <!-- Текст "Я тебя люблю очень сильно, моя девочка" -->
+    <div class="love-message">
+        Я тебя люблю очень сильно, моя девочка 💖
+    </div>
 
 </body>
 </html>
