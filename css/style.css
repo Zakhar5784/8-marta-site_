@@ -6,12 +6,20 @@
     <title>С 8 Марта, Машенька!</title>
     <style>
         body {
-            background-color: white;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3, #ff9a9e, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
             margin: 0;
+            overflow: hidden;
             font-family: Arial, sans-serif;
             text-align: center;
             color: black;
-            overflow: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -25,10 +33,12 @@
         }
 
         .content {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
             opacity: 0;
-            animation: fadeInText 5s forwards;
-            transform: scale(0.8);
-            animation: textZoom 5s forwards;
+            animation: fadeInText 5s forwards, textZoom 5s forwards;
         }
 
         @keyframes fadeInText {
@@ -41,98 +51,55 @@
             100% { transform: scale(1); }
         }
 
-        .falling-heart {
+        .heart {
             position: absolute;
+            font-size: 20px; /* Уменьшенный размер */
             color: red;
-            font-size: 20px;
-            animation: fall linear infinite;
-            animation-duration: 3s;
+            animation: flyHeart 3s forwards;
+            opacity: 1;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10%); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
-        }
-
-        /* Эффект для текста "Ты только моя девочка" */
-        .heart-text {
-            position: absolute;
-            left: 50%;
-            top: 10%;
-            font-size: 30px;
-            color: black;
-            opacity: 0;
-            animation: slideInText 3s forwards;
-        }
-
-        @keyframes slideInText {
+        @keyframes flyHeart {
             0% {
                 transform: translateX(-100vw);
-                opacity: 0;
+                opacity: 1;
             }
             50% {
-                transform: translateX(20vw);
+                transform: translateX(50vw);
                 opacity: 1;
             }
             100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        /* Эффект для текста "Я тебя люблю очень сильно, моя девочка" */
-        .bottom-text {
-            position: absolute;
-            bottom: 10%;
-            font-size: 30px;
-            color: black;
-            white-space: nowrap;
-            animation: scrollText 10s linear infinite;
-        }
-
-        @keyframes scrollText {
-            0% {
                 transform: translateX(100vw);
-            }
-            100% {
-                transform: translateX(-100vw);
+                opacity: 0;
             }
         }
+
+        h1, h2, p {
+            transition: all 0.3s ease;
+        }
+
+        h1:hover, h2:hover, p:hover {
+            color: #ff4081;
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body>
 
     <script>
-        function createHeart() {
+        function createFlyingHeart() {
             const heart = document.createElement("div");
-            heart.classList.add("falling-heart");
-            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️ Ты только моя ❤️";
             document.body.appendChild(heart);
-
-            let size = Math.random() * 30 + 10;
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = size + "px";
-            heart.style.opacity = Math.random() * 0.7 + 0.3;
-            heart.style.animationDuration = Math.random() * 4 + 2 + "s";
 
             setTimeout(() => {
                 heart.remove();
-            }, 5000);
+            }, 3000); // Удаление после 3 секунд
         }
 
-        setInterval(createHeart, 300);
-
-        // Создаем текст "Ты только моя девочка"
-        const heartText = document.createElement("div");
-        heartText.classList.add("heart-text");
-        heartText.innerHTML = "Ты только моя девочка";
-        document.body.appendChild(heartText);
-
-        // Текст внизу
-        const bottomText = document.createElement("div");
-        bottomText.classList.add("bottom-text");
-        bottomText.innerHTML = "Я тебя люблю очень сильно, моя девочка ❤️💘";
-        document.body.appendChild(bottomText);
+        setInterval(createFlyingHeart, 4000); // Создание нового сердечка каждые 4 секунды
     </script>
 
     <div class="container">
@@ -150,4 +117,3 @@
 
 </body>
 </html>
-                
