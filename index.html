@@ -33,13 +33,9 @@
         }
 
         .content {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            opacity: 0;
+            color: black;
+            opacity: 1;
             animation: fadeInText 5s forwards;
-            transform: scale(0.8);
         }
 
         @keyframes fadeInText {
@@ -69,36 +65,32 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
+        /* Эффект для текста "Ты только моя девочка" */
         .heart-text {
             position: absolute;
-            left: 50%;
-            top: 30%;
-            font-size: 40px;
+            top: 10%;
+            left: -100%;
+            font-size: 30px;
             color: #ff4081;
             opacity: 0;
             animation: slideInText 3s forwards;
         }
 
         @keyframes slideInText {
-            0% { transform: translateX(-100vw); opacity: 0; }
-            50% { transform: translateX(20vw); opacity: 1; }
-            100% { transform: translateX(0); opacity: 1; }
+            0% {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(100vw);
+                opacity: 1;
+            }
         }
-
-        /* Звуковое сопровождение */
-        audio {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            visibility: hidden;
-        }
-
     </style>
 </head>
 <body>
 
     <script>
-        // Функция для создания падающих сердечек
         function createHeart() {
             const heart = document.createElement("div");
             heart.classList.add("falling-heart");
@@ -116,21 +108,13 @@
             }, 5000);
         }
 
-        // Интервал для генерации сердечек
         setInterval(createHeart, 300);
 
-        // Текст "Ты только моя девочка"
+        // Создаем текст с анимацией
         const heartText = document.createElement("div");
         heartText.classList.add("heart-text");
         heartText.innerHTML = "Ты только моя девочка ❤️";
         document.body.appendChild(heartText);
-
-        // Фоновая музыка
-        const audio = document.createElement("audio");
-        audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // Замените на свой путь к музыке
-        audio.loop = true;
-        audio.autoplay = true;
-        document.body.appendChild(audio);
     </script>
 
     <div class="container">
