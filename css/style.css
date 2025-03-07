@@ -6,12 +6,20 @@
     <title>С 8 Марта, Машенька!</title>
     <style>
         body {
-            background-color: white;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3, #ff9a9e, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
             color: black;
             overflow: hidden;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -22,6 +30,30 @@
             align-items: center;
             justify-content: center;
             z-index: 2;
+        }
+
+        .content {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            animation: fadeInText 5s forwards;
+            transform: scale(0.8);
+        }
+
+        @keyframes fadeInText {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        h1, h2, p {
+            transition: all 0.3s ease;
+        }
+
+        h1:hover, h2:hover, p:hover {
+            color: #ff4081;
+            transform: scale(1.1);
         }
 
         .falling-heart {
@@ -48,40 +80,25 @@
         }
 
         @keyframes slideInText {
-            0% {
-                transform: translateX(-100vw);
-                opacity: 0;
-            }
-            50% {
-                transform: translateX(20vw);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            0% { transform: translateX(-100vw); opacity: 0; }
+            50% { transform: translateX(20vw); opacity: 1; }
+            100% { transform: translateX(0); opacity: 1; }
         }
 
-        .content {
+        /* Звуковое сопровождение */
+        audio {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            bottom: 10px;
+            left: 10px;
+            visibility: hidden;
         }
 
-        .bottom-text {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            color: #555;
-        }
     </style>
 </head>
 <body>
 
     <script>
+        // Функция для создания падающих сердечек
         function createHeart() {
             const heart = document.createElement("div");
             heart.classList.add("falling-heart");
@@ -99,13 +116,21 @@
             }, 5000);
         }
 
+        // Интервал для генерации сердечек
         setInterval(createHeart, 300);
 
-        // Создаем текст с анимацией
+        // Текст "Ты только моя девочка"
         const heartText = document.createElement("div");
         heartText.classList.add("heart-text");
         heartText.innerHTML = "Ты только моя девочка ❤️";
         document.body.appendChild(heartText);
+
+        // Фоновая музыка
+        const audio = document.createElement("audio");
+        audio.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // Замените на свой путь к музыке
+        audio.loop = true;
+        audio.autoplay = true;
+        document.body.appendChild(audio);
     </script>
 
     <div class="container">
@@ -119,10 +144,6 @@
             <p>😊 Пусть тепло и радость окружают тебя каждый день, а сегодня — особенно!</p>
             <p>С праздником! 🌷</p>
         </div>
-    </div>
-
-    <div class="bottom-text">
-        Я тебя люблю очень сильно, моя девочка 💖
     </div>
 
 </body>
