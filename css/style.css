@@ -53,14 +53,25 @@
 
         .heart {
             position: absolute;
+            font-size: 20px; /* Уменьшенный размер */
             color: red;
-            font-size: 20px;
-            animation: fall linear infinite;
+            animation: flyHeart 3s forwards;
+            opacity: 1;
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10%); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+        @keyframes flyHeart {
+            0% {
+                transform: translateX(-100vw);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(50vw);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
         }
 
         h1, h2, p {
@@ -72,45 +83,23 @@
             transform: scale(1.1);
         }
 
-        .button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 18px;
-            border: none;
-            background-color: #ff4081;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #ff1a5b;
-            transform: scale(1.1);
-        }
     </style>
 </head>
 <body>
 
     <script>
-        function createHeart() {
+        function createFlyingHeart() {
             const heart = document.createElement("div");
             heart.classList.add("heart");
-            heart.innerHTML = "❤️";
+            heart.innerHTML = "❤️ Ты только моя ❤️";
             document.body.appendChild(heart);
-
-            let size = Math.random() * 30 + 10;
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = size + "px";
-            heart.style.opacity = Math.random() * 0.7 + 0.3;
-            heart.style.animationDuration = Math.random() * 4 + 2 + "s";
 
             setTimeout(() => {
                 heart.remove();
-            }, 5000);
+            }, 3000); // Удаление после 3 секунд
         }
 
-        setInterval(createHeart, 300);
+        setInterval(createFlyingHeart, 4000); // Создание нового сердечка каждые 4 секунды
     </script>
 
     <div class="container">
@@ -123,7 +112,6 @@
             <p>💖 Пусть каждый новый день будет лучше предыдущего!</p>
             <p>😊 Пусть тепло и радость окружают тебя каждый день, а сегодня — особенно!</p>
             <p>С праздником! 🌷</p>
-            <button class="button">Поздравить Машеньку!</button>
         </div>
     </div>
 
