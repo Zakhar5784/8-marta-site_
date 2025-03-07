@@ -38,7 +38,9 @@
             border-radius: 10px;
             backdrop-filter: blur(10px);
             opacity: 0;
-            animation: fadeInText 5s forwards, textZoom 5s forwards;
+            animation: fadeInText 5s forwards;
+            transform: scale(0.8);
+            animation: textZoom 5s forwards;
         }
 
         @keyframes fadeInText {
@@ -53,53 +55,75 @@
 
         .heart {
             position: absolute;
-            font-size: 20px; /* Уменьшенный размер */
             color: red;
-            animation: flyHeart 3s forwards;
-            opacity: 1;
+            font-size: 20px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10%); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .special-heart {
+            position: absolute;
+            font-size: 24px;
+            color: red;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 50px;
+            opacity: 0;
+            animation: flyHeart 4s ease-in-out 1s forwards;
         }
 
         @keyframes flyHeart {
-            0% {
-                transform: translateX(-100vw);
-                opacity: 1;
-            }
-            50% {
-                transform: translateX(50vw);
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(100vw);
-                opacity: 0;
-            }
+            0% { transform: translateX(-100%) translateY(50vh); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100vw) translateY(30vh); opacity: 0; }
         }
 
-        h1, h2, p {
-            transition: all 0.3s ease;
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
         }
-
-        h1:hover, h2:hover, p:hover {
-            color: #ff4081;
-            transform: scale(1.1);
-        }
-
     </style>
 </head>
 <body>
 
     <script>
-        function createFlyingHeart() {
+        function createHeart() {
             const heart = document.createElement("div");
             heart.classList.add("heart");
-            heart.innerHTML = "❤️ Ты только моя ❤️";
+            heart.innerHTML = "❤️";
             document.body.appendChild(heart);
+
+            let size = Math.random() * 30 + 10;
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = size + "px";
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            heart.style.animationDuration = Math.random() * 4 + 2 + "s";
 
             setTimeout(() => {
                 heart.remove();
-            }, 3000); // Удаление после 3 секунд
+            }, 5000);
         }
 
-        setInterval(createFlyingHeart, 4000); // Создание нового сердечка каждые 4 секунды
+        setInterval(createHeart, 300);
+
+        setTimeout(() => {
+            const specialHeart = document.createElement("div");
+            specialHeart.classList.add("special-heart");
+            specialHeart.innerHTML = "Ты только моя ❤️";
+            document.body.appendChild(specialHeart);
+            
+            setTimeout(() => {
+                specialHeart.remove();
+            }, 4000);
+        }, 2000);
     </script>
 
     <div class="container">
@@ -114,6 +138,8 @@
             <p>С праздником! 🌷</p>
         </div>
     </div>
+
+    <div class="footer">Я тебя люблю очень сильно, моя девочка ❤️</div>
 
 </body>
 </html>
