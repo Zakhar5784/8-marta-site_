@@ -6,50 +6,12 @@
     <title>С 8 Марта, Машенька!</title>
     <style>
         body {
-            background: linear-gradient(45deg, #ff758c, #ff7eb3, #ff9a9e, #fad0c4);
-            background-size: 400% 400%;
-            animation: gradientAnimation 10s ease infinite;
+            background-color: white;
             margin: 0;
             font-family: Arial, sans-serif;
             text-align: center;
             color: black;
             overflow: hidden;
-        }
-
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-
-        .content {
-            color: black;
-            opacity: 1;
-            animation: fadeInText 5s forwards;
-        }
-
-        @keyframes fadeInText {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        h1, h2, p {
-            transition: all 0.3s ease;
-        }
-
-        h1:hover, h2:hover, p:hover {
-            color: #ff4081;
-            transform: scale(1.1);
         }
 
         .falling-heart {
@@ -83,9 +45,20 @@
             }
             100% {
                 transform: translateX(100vw);
-                opacity: 1;
+                opacity: 0;
             }
         }
+
+        /* Текст внизу */
+        .bottom-text {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: #ff4081;
+        }
+
     </style>
 </head>
 <body>
@@ -115,20 +88,112 @@
         heartText.classList.add("heart-text");
         heartText.innerHTML = "Ты только моя девочка ❤️";
         document.body.appendChild(heartText);
+
+        // Текст внизу
+        const bottomText = document.createElement("div");
+        bottomText.classList.add("bottom-text");
+        bottomText.innerHTML = "Я тебя люблю очень сильно моя девочка ❤️💘";
+        document.body.appendChild(bottomText);
     </script>
 
-    <div class="container">
-        <div class="content">
-            <h1>С 8 МАРТА</h1>
-            <h2>🌸 Моя дорогая Машенька! 🌸</h2>
-            <p>С 8 марта! 🌺 Пусть этот день принесет тебе больше радости, улыбок и волшебных моментов! ✨</p>
-            <p>Желаю всегда быть такой же яркой, вдохновляющей и невероятной! 😍</p>
-            <p>Пусть твоя жизнь будет наполнена счастьем, успехами и любовью! ♡</p>
-            <p>💖 Пусть каждый новый день будет лучше предыдущего!</p>
-            <p>😊 Пусть тепло и радость окружают тебя каждый день, а сегодня — особенно!</p>
-            <p>С праздником! 🌷</p>
-        </div>
-    </div>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 8 Марта, Машенька!</title>
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: black;
+            overflow: hidden;
+        }
+
+        .falling-heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: fall linear infinite;
+            animation-duration: 3s;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10%); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Эффект для текста "Ты только моя девочка" */
+        .heart-text {
+            position: absolute;
+            top: 10%;
+            left: -100%;
+            font-size: 30px;
+            color: #ff4081;
+            opacity: 0;
+            animation: slideInText 3s forwards;
+        }
+
+        @keyframes slideInText {
+            0% {
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        /* Текст внизу */
+        .bottom-text {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            color: #ff4081;
+        }
+
+    </style>
+</head>
+<body>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("falling-heart");
+            heart.innerHTML = "❤️";
+            document.body.appendChild(heart);
+
+            let size = Math.random() * 30 + 10;
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = size + "px";
+            heart.style.opacity = Math.random() * 0.7 + 0.3;
+            heart.style.animationDuration = Math.random() * 4 + 2 + "s";
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // Создаем текст с анимацией
+        const heartText = document.createElement("div");
+        heartText.classList.add("heart-text");
+        heartText.innerHTML = "Ты только моя девочка ❤️";
+        document.body.appendChild(heartText);
+
+        // Текст внизу
+        const bottomText = document.createElement("div");
+        bottomText.classList.add("bottom-text");
+        bottomText.innerHTML = "Я тебя люблю очень сильно моя девочка ❤️💘";
+        document.body.appendChild(bottomText);
+    </script>
 
 </body>
 </html>
